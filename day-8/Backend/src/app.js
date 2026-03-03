@@ -3,10 +3,16 @@
 const express = require('express')
 const app = express();
 const userModel = require('./models/notes.model');
+// for accepting cross origin request
+const cors = require('cors')
 
 // middleware for readinf data of req.body
 app.use(express.json());
+// for server to start accepting cors origin request, we will sue middleware as cors
+app.use(cors)
 
+// APIS
+// POST 
 app.post('/api/notes', async (req, res) => {
     //
     const {title, description} = req.body;
