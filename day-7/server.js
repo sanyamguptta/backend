@@ -1,16 +1,13 @@
-// server ko start krna
-// DB se connect krna 
+// for starting server
+// for connecting serve to the DB
 
-// for accessing value of variables made under .env file
-require.dotenv.config()
-const connecttoDB = require('./src/cofig/database')
-const mongoose = require('mongoose')
+// installing dotenv pakg and requiring it for accessing values of variable of .env file 
+require('dotenv').config()
 const app = require('./src/app')
+const connectToDB = require('./src/config/database');
 
-// connecting DB
-connecttoDB();
-
+connectToDB();
 
 app.listen(3000, () => {
-  console.log("Server is listening at port 3000");
-});
+    console.log('Server is listening at port 3000');
+})
