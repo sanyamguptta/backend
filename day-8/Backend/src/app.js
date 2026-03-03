@@ -9,7 +9,7 @@ const cors = require('cors')
 // middleware for readinf data of req.body
 app.use(express.json());
 // for server to start accepting cors origin request, we will sue middleware as cors
-app.use(cors)
+app.use(cors())
 
 // APIS
 // POST 

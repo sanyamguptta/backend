@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios'
 
 function App() {
@@ -21,12 +21,17 @@ function App() {
     },
   ]);
 
-  // calling GET method api using axios
-  axios.get('http://localhost:3000/api/notes')
-  // sending back resposne as data 
-  .then( (res) => {
-    console.log(res.data);
-  })
+  // showing frontend data using axios
+  useEffect( () => {
+    // calling GET method api using axios
+    axios
+      .get("http://localhost:3000/api/notes")
+      // sending back resposne as data
+      .then((res) => {
+        console.log(res.data.notes);
+        setnotes(res.data.notes)
+      });
+  }, [])
 
   return (
     <>
