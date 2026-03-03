@@ -38,4 +38,42 @@ app.get('/api/notes', async (req, res) => {
     })
 })
 
+// DELETE -> /api/notes/:id
+app.delete('/api/notes/:id', async (req, res) => {
+
+    // deleting note through id receiving from req.body
+    const id = req.params.id;
+    console.log(id)
+
+    // deleting note with id received from req.params.id
+    await userModel.findByIdAndDelete(id)
+
+    // sending back response after deleting note with id (coming from req.params.id)
+    res.status(200).json({
+        message: "Note deleted successfully!"
+    })
+
+})
+
+
+// PATCH: used to update
+app.patch('/api/notes/:id', async (req, res) => {
+
+  // updating note through id received from req.body
+  const id = req.params.id;
+  // destructuring data 
+  const { description } = req.body;
+
+  // updating note data 
+  await userModel.findByIdAndUpdate(id, {
+    description,
+  });
+
+  // sending response after updating note
+  res.status(200).json({
+    message: "Note updated successfully!",
+  });
+
+})
+
 module.exports = app; 
