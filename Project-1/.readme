@@ -1,0 +1,15 @@
+==> Authentication
+    ==> Register (1. user data save krna DB mei 2. token create krke, user ko dena)
+    ==> Login
+    ==> Logout (token blacklisting)
+    ==> otp based Registeration (Advance)
+
+    // POST RELATED FEATURES
+    ==> create a POST
+    ==> can view a feed
+    ==> like a POST
+    ==> save a POST
+
+    // USERS RELATED FESTURES
+    ==> followers
+    ==> following
