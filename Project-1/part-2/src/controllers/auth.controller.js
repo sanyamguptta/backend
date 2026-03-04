@@ -1,8 +1,8 @@
 // this file is used for writing logic of all authRouters (controllers logic)
 
 const userModel = require("../models/user.model");
-// requiring crpto for converting password into hash
-const crypto = require('crypto');
+// requiring bcrypt for converting password into hash
+const bcrypt = require('bcryptjs')
 // for creating token
 const jwt = require('jsonwebtoken');
 
@@ -52,8 +52,8 @@ async function registerController(req, res) {
   }
 
   // yaha agye mtlb user exits nhi krta h, so register user 
-  // converting password into hash
-  const hash = crypto.createHash('sha256').update(password).digest('hex');
+  // converting password into hash using bcrypt
+  const hash = await bcrypt(password, 10) // 2nd para -> salt -> number of hashing(layers of hashing)
 
   // creating user after converting password into hash
   // this user data will be saved in the DB
@@ -113,11 +113,8 @@ async function loginController(req, res) {
     }
 
     // agar yaha aagye mtlb user exits krta h
-    // converting password into hash
-    const hash = crypto.createHash('sha256').update(password).digest('hex');
-
-    // checking password is correct by comparing it with registered user data
-    const isPasswordValid = hash === user.password
+    // converting login password into hash & then, comparing it with DB registered password (data)
+    const isPasswordValid = await bcrypt.compare(password, user.password)
     if(!isPasswordValid) {
         return res.status(401).json({
             message: "Password is incorrect!"
