@@ -7,6 +7,7 @@ const imagekit = new ImageKit({
   privateKey: process.env["IMAGEKIT_PRIVATE_KEY"],
 });
 
+
 async function createPostController(req, res) {
   // file from the postman will be recieved at server in rew.file
   console.log(req.body, req.file);
