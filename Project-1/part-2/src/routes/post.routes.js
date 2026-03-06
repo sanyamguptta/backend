@@ -1,13 +1,22 @@
 const express = require('express')
 const postRouter = express.Router()
 const postController = require('../controllers/post.controller')
-// multer provide express serve rwith power to read files (img) from frontend
+// multer provide express with powers, to read files (img) coming from frontend to server
 const multer = require('multer')
 // memoryStorage is used for storing file for temporary purpose
 const upload = multer({storage: multer.memoryStorage() })
 
+// POST /api/post/
+postRouter.post('/', upload.single("img"), postController.createPostController);
 
-//  /api/post/
-postRouter.post('/', upload.single("image"), postController.createPostController)
+
+// GET -> /api/post/
+postRouter.get('/', postController.getPostController);
+
+// GET -> /api/post/details/:postid
+// return an detail about specific post with the id. also check whether the post belongs to the user that the request come from
+postRouter.get('/details/:postId', postController.getPostDetailsController);
+
+
 
 module.exports = postRouter;

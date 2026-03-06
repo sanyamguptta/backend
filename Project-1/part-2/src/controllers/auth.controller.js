@@ -53,7 +53,7 @@ async function registerController(req, res) {
 
   // yaha agye mtlb user exits nhi krta h, so register user 
   // converting password into hash using bcrypt
-  const hash = await bcrypt(password, 10) // 2nd para -> salt -> number of hashing(layers of hashing)
+  const hash = await bcrypt.hash(password, 10) // 2nd para -> salt -> number of hashing(layers of hashing)
 
   // creating user after converting password into hash
   // this user data will be saved in the DB

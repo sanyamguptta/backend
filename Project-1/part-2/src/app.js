@@ -11,6 +11,7 @@ const app = express();
 // MIDDLEWARES
 app.use(express.json());
 app.use(cookieParser()) // using cookie-parser as middleware
+app.use(express.urlencoded({ extended: true }));
 
 // using this prefix for all allRouters routes
 app.use('/api/auth', authRouter);
