@@ -8,6 +8,11 @@ const imagekit = new ImageKit({
   privateKey: process.env["IMAGEKIT_PRIVATE_KEY"],
 });
 
+
+/**
+ * @route POST  -> /api/posts   [protected]
+ * @descrption -> create apost with the content and images    
+ */
 async function createPostController(req, res) {
   // file from the postman will be recieved at server in rew.file
   console.log(req.body, req.file);
@@ -33,6 +38,10 @@ async function createPostController(req, res) {
   // res.send(file);
 }
 
+/**
+ * @route GET -> /api/posts   [protected]
+ * @descrption -> Gets all the posts created by the user which have requested 
+ */
 async function getPostController(req, res) {
   let userID = req.user.id;
 
@@ -47,6 +56,10 @@ async function getPostController(req, res) {
   });
 }
 
+/**
+ * @route GET  -> /api/posts/details
+ * @descrption -> returns a detail about specific post with the id 
+ */
 async function getPostDetailsController(req, res) {
   let userID = req.user.id;
   let postID = req.params.postId;
@@ -74,6 +87,10 @@ async function getPostDetailsController(req, res) {
   });
 }
 
+/**
+ * @route POST -> /api/posts/like/:postid
+ * @descrption -> Like a post from the id provided in the req.params
+ */
 async function likePostController(req, res) {
   //
   const username = req.user.username;
