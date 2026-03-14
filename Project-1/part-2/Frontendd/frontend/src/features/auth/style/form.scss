@@ -1,0 +1,29 @@
+main {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  form{
+    display: flex;                                            
+    flex-direction: column;
+    gap: 1rem;
+
+    width: 350px;
+
+    input {
+        border: none;
+        outline: none;
+        padding-inline: 1rem; // left & right
+        padding-block: 0.7rem; // top & bottom
+
+        border-radius: 0.5rem;
+    }
+
+    p {
+      color:rgb(209, 24, 24);
+    }
+  }
+}
