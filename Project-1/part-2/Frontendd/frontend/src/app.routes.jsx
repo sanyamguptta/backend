@@ -12,6 +12,10 @@ const router = createBrowserRouter([
     {
         path: '/Register',
         element: <Register />
+    }, 
+    {
+        path: '/',
+        element: <h1>Learning 4 layer architecture</h1>
     }
 ])
 
