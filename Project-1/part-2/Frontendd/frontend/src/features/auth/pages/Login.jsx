@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 
 const Login = () => {
   // destructuring all 4 from useAuth()
-  const { user, loading, handleLogin } = useAuth();
+  const {loading, handleLogin } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
