@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Password is required"],
+    select: false // used for not reading password from DB, but password will be saved in the DB
   },
   bio: String,
   profileImage: {
@@ -24,6 +25,6 @@ const userSchema = new mongoose.Schema({
 });
 
 // creating userModel
-const userModel = new mongoose.model("users", userSchema);
+const userModel = new mongoose.model("user", userSchema);
 
 module.exports = userModel;
