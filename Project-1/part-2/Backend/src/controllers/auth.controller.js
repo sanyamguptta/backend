@@ -96,9 +96,11 @@ async function loginController(req, res) {
   //
   const { email, username, password } = req.body;
 
-  const user = await userModel.findOne({
-    $or: [{ username: username }, { email: email }],
-  }).select('+password') // this force our query to read password even it is can't be read as bydefault
+  const user = await userModel
+    .findOne({
+      $or: [{ username: username }, { email: email }],
+    })
+    .select("+password"); // this force our query to read password even it is can't be read as bydefault
 
   // agar user exist hi nhi kr rha toh return krdo
   if (!user) {
@@ -144,6 +146,21 @@ async function loginController(req, res) {
       profileImage: user.profileImage,
     },
   });
+  // res.cookie("token", token, {
+  //   httpOnly: true,
+  //   sameSite: "lax",
+  //   secure: false
+  // });
+
+  // res.status(200).json({
+  //   message: "User logged in successfully!",
+  //   user: {
+  //     username: user.username,
+  //     email: user.email,
+  //     bio: user.bio,
+  //     profileImage: user.profileImage,
+  //   },
+  // });
 }
 
 module.exports = {

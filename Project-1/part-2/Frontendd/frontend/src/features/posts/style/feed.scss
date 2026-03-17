@@ -1,0 +1,78 @@
+.feed-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  .feed {
+      max-width: 300px;
+  }
+
+  .posts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+
+    .post {
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background-color: rgb(57, 18, 18);
+      padding-block: 0.5rem;
+      padding-inline: 0.5rem;
+
+      .user {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .img-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 3px;
+          border-radius: 50%;
+          background: conic-gradient(rgb(90, 14, 75), purple, rgb(118, 37, 37));
+        }
+
+        img {
+          width: 3rem;
+          aspect-ratio: 1/1;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      .icons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .like {
+            color: red;
+        }
+
+        .left {
+          display: flex;
+          gap: 0.5rem;
+        }
+        svg {
+          width: 1.1rem;
+          aspect-ratio: 1/1;
+          color: white;
+        }
+        button {
+          background-color: transparent;
+          border: none;
+          outline: none;
+        }
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

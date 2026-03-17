@@ -9,10 +9,9 @@ const imagekit = new ImageKit({
   privateKey: process.env["IMAGEKIT_PRIVATE_KEY"],
 });
 
-
 /**
  * @route POST  -> /api/posts   [protected]
- * @descrption -> create apost with the content and images    
+ * @descrption -> create apost with the content and images
  */
 async function createPostController(req, res) {
   // file from the postman will be recieved at server in rew.file
@@ -41,7 +40,7 @@ async function createPostController(req, res) {
 
 /**
  * @route GET -> /api/posts   [protected]
- * @descrption -> Gets all the posts created by the user which have requested 
+ * @descrption -> Gets all the posts created by the user which have requested
  */
 async function getPostController(req, res) {
   let userID = req.user.id;
@@ -59,7 +58,7 @@ async function getPostController(req, res) {
 
 /**
  * @route GET  -> /api/posts/details
- * @descrption -> returns a detail about specific post with the id 
+ * @descrption -> returns a detail about specific post with the id
  */
 async function getPostDetailsController(req, res) {
   let userID = req.user.id;
@@ -113,32 +112,52 @@ async function likePostController(req, res) {
   });
 
   res.status(200).json({
-    message: 'Post liked successfully!',
-    like
-  })
-
+    message: "Post liked successfully!",
+    like,
+  });
 }
 
 /**
- * @route GET -> 
+ * @route GET ->
  */
 async function getFeedController(req, res) {
+  // getting username of the user who has requested for feed from the middleware which is stored in req.username
+  const user = req.user;
 
   // finding all posts created in the DB
-  const posts = await postModel.find().populate('user'); // .populate() -> gives user data instead of only userID
+  const arrOfPosts = await postModel.find().populate("user").lean();
+  const posts = await Promise.all(
+    arrOfPosts.map(async (post) => {
+      /**
+       * @typeof post -> mongoooseObject
+       * we convert it to normal JS object using .lean() method, because we can't add new property in mongoose object, but we can add new property in normal JS object
+       */
 
-    res.status(200).json({
-      message: 'Fetched all posts successfully!',
-      posts
-    })
+      // finding if the post is liked by the user who has requested for feed
+      const isLiked = await likeModel.findOne({
+        user: user.username,
+        post: post._id,
+      });
+
+      // adding new property in post which is isLiked, which will be true if the post is liked by the user who has requested for feed, otherwise false
+      post.isLiked = !!isLiked; // boolean value
+
+      // returning post with new property isLiked
+      return post;
+    }),
+  );
+
+  // sending response with all posts with new property isLiked
+  res.status(200).json({
+    message: "Fetched all posts successfully!",
+    posts,
+  });
 }
-
-
 
 module.exports = {
   createPostController,
   getPostController,
   getPostDetailsController,
   likePostController,
-  getFeedController
+  getFeedController,
 };

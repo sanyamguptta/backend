@@ -27,7 +27,7 @@ export async function login(username, password) {
     })
 
     return response;
-}
+}    
 
 export async function getMe() {
     //calling get-me api
