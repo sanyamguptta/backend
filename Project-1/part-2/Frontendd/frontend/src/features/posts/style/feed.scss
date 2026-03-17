@@ -50,23 +50,44 @@
         justify-content: space-between;
         align-items: center;
 
-        .like {
-            color: red;
-        }
+        font-size: 0.4rem;
 
         .left {
           display: flex;
           gap: 0.5rem;
+
+          button {
+            border: none;
+            outline: none;
+            color: white;
+            background-color: transparent;
+          }
+
+          .red {
+            color: red;
+          }
+          .white {
+            color: white;
+          }
         }
+        
         svg {
           width: 1.1rem;
           aspect-ratio: 1/1;
-          color: white;
+          // color: white;
         }
-        button {
-          background-color: transparent;
-          border: none;
-          outline: none;
+        // button {
+        //   background-color: transparent;
+        //   border: none;
+        //   outline: none;
+        // }
+
+        .right {
+          button {
+            color: white;
+            background-color: transparent;
+            border: none;
+          }
         }
       }
 
