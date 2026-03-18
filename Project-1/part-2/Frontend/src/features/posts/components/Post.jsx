@@ -1,6 +1,10 @@
 import React from "react";
+import { usePost } from "../hooks/usePost";
 
 const Post = ({ user, post }) => {
+
+  const { loading, handleLike, handleUnlike } = usePost();
+
   return (
     <div className="posts">
       <div className="post">
@@ -16,6 +20,10 @@ const Post = ({ user, post }) => {
             <button
               // if post is liked by the user then add class like to the button, otherwise no class will be added
               className={post.isLiked ? "red" : "white"}
+              // calling function based on whether the post is liked or not 
+              onClick={ () => {
+                post.isLiked ? handleUnlike(post._id) : handleLike(post._id);
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
