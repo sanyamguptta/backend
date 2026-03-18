@@ -116,6 +116,36 @@ async function likePostController(req, res) {
     like,
   });
 }
+/**
+ * @route POST -> /api/posts/unlike/:postid
+ * @descrption -> Unlike a post from the id provided in the req.params
+ */
+async function unlikePostController(req, res) {
+  
+  const username = req.user.username;
+  const postId = req.params.postid;
+
+  // checking if post exits or not for liking it
+  const isLiked = await likeModel.findOne({
+    post: postId,
+    user: username,
+  })
+
+  // if post is not liked by the user then return error
+  if(!isLiked) {
+    return res.status(400).json({
+      message: 'Post is not liked by the user!',
+    })
+  }
+
+  // deleting the like record from the DB
+  await likeModel.findByIdAndDelete(isLiked._id);
+
+  return res.status(200).json({
+    message: 'Post unliked successfully!',
+  })
+
+}
 
 /**
  * @route GET ->
@@ -125,7 +155,7 @@ async function getFeedController(req, res) {
   const user = req.user;
 
   // finding all posts created in the DB
-  const arrOfPosts = await postModel.find().populate("user").lean();
+  const arrOfPosts = await postModel.find().sort({_id: -1}).populate("user").lean(); // sorting post based on id in descending order, so that latest post will be at the top of the feed, and populating user field to get user details in the post, and using .lean() method to convert mongoose object to normal JS object
   const posts = await Promise.all(
     arrOfPosts.map(async (post) => {
       /**
@@ -159,5 +189,6 @@ module.exports = {
   getPostController,
   getPostDetailsController,
   likePostController,
+  unlikePostController,
   getFeedController,
 };

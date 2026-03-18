@@ -41,6 +41,16 @@ postRouter.post(
   postController.likePostController,
 );
 
+/** @route POST -> api/posts/likes/:postid
+  @description -> unlike a post with the id provided in the req.params.id, also check whether the post belongs to the user or not
+  @access     -> private
+*/
+postRouter.post(
+  "/unlike/:postid",
+  identifyUser,
+  postController.unlikePostController,
+);
+
 /**
  * @route GET -> /api/posts/feed
  * @descrtion -> get all the osts created in the DB

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "../style/feed.scss";
 import Post from "../components/post";
 import { usePost } from "../hooks/usePost"; // importing custom hook
+import Nav from "../../shared/components/Nav";
 
 const Feed = () => {
 
@@ -27,6 +28,8 @@ const Feed = () => {
 
   return (
     <main className="feed-page">
+      {/* rendering Nav component */}
+      <Nav />
       <div className="feed">
         {/* rendering POST component */}
         <div className="posts">
